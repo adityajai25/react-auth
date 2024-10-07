@@ -4,9 +4,14 @@ import axios from 'axios';
 import {toast} from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
+
 export default function Signup() {
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    useEffect(() => {
+        document.title = "Sign-up 🔒";
+        document.icon = "🔒";
+    })
     const [data, setdata] = useState({
         fname: '',
         lname: '',

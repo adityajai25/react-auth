@@ -66,6 +66,7 @@ router.post('/login', async(req,res)=>{
     const {email,password} = req.body;
     try{
         const users = await user.findOne({email});
+        const username = users.fname;
         if(!users){
             return res.status(422).json({
                 error: "User email doesnot exists.."
@@ -78,9 +79,11 @@ router.post('/login', async(req,res)=>{
         }
         if(users.email === req.body.email && users.password === req.body.password){
             return res.status(200).json({
-                message: "Login successful!"
+                message: "Login successful!",
+                username: username
             })
         }
+        console.log(username)
     }catch(error){
         console.log(error);
     }

@@ -1,16 +1,20 @@
 import {Link} from 'react-router-dom';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import {toast} from 'react-hot-toast';
 
 export default function Login() {
     const navigate = useNavigate();
-
+    const [showPassword, setShowPassword] = useState(false);
     const [data,setdata] = useState({
         email:'',
         password:''
     });
+    useEffect(()=>{
+        document.title = "Sign-in 🔒";
+        document.icon="🔒";
+    })
     const loginuser = async(e) =>{
         e.preventDefault();
         try{
@@ -21,9 +25,11 @@ export default function Login() {
             });
             if (response.status === 200) {
                 toast.success('Login successful!');
-                 // Set the user as authenticated
-                setdata({ email: '', password: '' });  // Reset the form data
-                navigate('/');  // Navigate to the homepage or another page
+                setdata({ email: '', password: '' });
+                const {username} = response.data;  // Reset the form data
+                navigate('/',{
+                    state :{username}
+                });
             }
 
         }catch(error){
@@ -45,11 +51,19 @@ export default function Login() {
                     <label htmlFor="floatingemail">Email address</label>
                 </div>
                 <div className="form-floating mb-3">
-                    <input type="password" className="form-control" id="floatingPassword" placeholder="password" name="password"
+                    <input type={showPassword ? "text" : "password"} className="form-control" id="floatingPassword" placeholder="password" name="password"
                     value={data.password}
                     onChange={(e)=> setdata({...data,password:e.target.value})}
                     required/>
                     <label htmlFor="floatingPassword">Password</label>
+                    <button
+                        type="button"
+                        className="btn btn-outline-dark position-absolute end-1 top-50 translate-middle-y"
+                        onClick={() => setShowPassword(!showPassword)}
+                        style={{ right: '10px' }}
+                    >
+                        {showPassword ? 'Hide' : 'Show'}
+                    </button>
                 </div>
                 <button type="submit">
                     Submit
