@@ -17,7 +17,7 @@ export default function Home() {
     }
     return (
         <div>
-            <h1>Welcome {username} !!</h1>
+            <h1>Welcome 🏠 {username}</h1>
             <button onClick={home}>Logout</button>
         </div>
     )
