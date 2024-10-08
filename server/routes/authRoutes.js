@@ -14,6 +14,14 @@ router.get('/',(req,res)=>{
     res.json('Server is running');
 })
 
+router.get('/login',async(req,res)=>{
+    res.json('Login API');
+});
+
+router.get('/signup',async(req,res)=>{
+    res.json('Signup API');
+});
+
 router.get('/signup',async(req,res)=>{
     try{
         const users = await user.find({});
