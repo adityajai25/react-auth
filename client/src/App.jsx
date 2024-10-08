@@ -8,7 +8,7 @@ import {Toaster} from 'react-hot-toast';
 import ProtectedRoute from './components/Protected';
 import GuestRoute from './components/GuestRoute';
 
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = import.meta.env.url;
 axios.defaults.withCredentials = true;
 
 function App() {
