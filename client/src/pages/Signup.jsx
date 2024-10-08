@@ -46,7 +46,7 @@ export default function Signup() {
         const { fname, lname, email, password, cpassword,city } = data;
 
         try {
-            const response = await axios.post('/signup', {
+            const response = await axios.post('https://react-auth-n6kk.onrender.com/signup', {
                 fname,
                 lname,
                 email,

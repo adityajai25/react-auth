@@ -19,7 +19,7 @@ export default function Login() {
         e.preventDefault();
         try{
             const {email,password} = data;
-            const response = await axios.post('/login',{
+            const response = await axios.post('https://react-auth-n6kk.onrender.com/login',{
                 email,
                 password
             });
