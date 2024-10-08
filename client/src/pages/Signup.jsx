@@ -42,7 +42,7 @@ export default function Signup() {
 
         const { fname, lname, email, password, cpassword,city } = data;
         try {
-            const response = await axios.post('http://localhost:5000/signup', {
+            const response = await axios.post('/signup', {
                 fname,
                 lname,
                 email,
