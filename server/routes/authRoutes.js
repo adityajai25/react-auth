@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cors = require('cors');
 const user = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 router.use(cors(
     {
@@ -85,16 +86,35 @@ router.post('/login', async(req,res)=>{
             })
         }
         const username = users.fname;
+        const token = jwt.sign({ userId: users._id, username:users.fname }, process.env.jwt_key, { expiresIn: '10s' });
+
+        console.log(username)
         if(users.email === req.body.email && users.password === req.body.password){
             return res.status(200).json({
                 message: "Login successful!",
-                username: username
+                username: username,
+                token
             })
         }
-        console.log(username)
+        
     }catch(error){
         console.log(error);
     }
 })
+
+router.post('/protected', async (req, res) => {
+    const token = req.headers['authorization']?.split(' ')[1];
+    if (!token) {
+        return res.status(401).json({ error: 'No token provided.' });
+    }
+
+    jwt.verify(token, process.env.jwt_key, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ error: 'Token is expired or invalid.' });
+        }
+        // Token is valid
+        res.status(200).json({ message: 'Access granted!', userId: decoded.userId,username:decoded.username });
+    });
+});
 
 module.exports = router;

@@ -14,22 +14,23 @@ export default function Login() {
     useEffect(()=>{
         document.title = "Sign-in 🔒";
         document.icon="🔒";
-    })
+    });
+
     const loginuser = async(e) =>{
         e.preventDefault();
         try{
             const {email,password} = data;
-            const response = await axios.post('https://react-auth-n6kk.onrender.com/login',{
+            const response = await axios.post('http://localhost:5000/login',{
                 email,
                 password
             });
             if (response.status === 200) {
                 toast.success('Login successful!');
                 setdata({ email: '', password: '' });
-                const {username} = response.data;  // Reset the form data
-                navigate('/',{
-                    state :{username}
-                });
+                localStorage.setItem('token', response.data.token);
+                const {username} = response.data;
+                localStorage.setItem('username', username);  // Reset the form data
+                navigate('/');
             }
 
         }catch(error){

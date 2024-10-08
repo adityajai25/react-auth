@@ -4,7 +4,6 @@ import axios from 'axios';
 import {toast} from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
-
 export default function Signup() {
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -36,17 +35,14 @@ export default function Signup() {
 
     const registeruser = async (e) => {
         e.preventDefault();
-
-        // Early exit if there's a password error
         if (error) {
             toast.error(error);
             return;
         }
 
         const { fname, lname, email, password, cpassword,city } = data;
-
         try {
-            const response = await axios.post('https://react-auth-n6kk.onrender.com/signup', {
+            const response = await axios.post('http://localhost:5000/signup', {
                 fname,
                 lname,
                 email,
