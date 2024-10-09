@@ -42,7 +42,7 @@ export default function Signup() {
 
         const { fname, lname, email, password, cpassword,city } = data;
         try {
-            const response = await axios.post('/signup', {
+            const response = await axios.post(`${import.meta.env.VITE_SIGNUP}`, {
                 fname,
                 lname,
                 email,

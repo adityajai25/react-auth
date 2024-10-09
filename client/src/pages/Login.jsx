@@ -20,7 +20,8 @@ export default function Login() {
         e.preventDefault();
         try{
             const {email,password} = data;
-            const response = await axios.post('/login',{
+            console.log(`${import.meta.env.VITE_LOGIN}`);
+            const response = await axios.post(`${import.meta.env.VITE_LOGIN}`,{
                 email,
                 password
             });
@@ -30,7 +31,7 @@ export default function Login() {
                 localStorage.setItem('token', response.data.token);
                 const {username} = response.data;
                 localStorage.setItem('username', username);  // Reset the form data
-                navigate('/');
+                navigate('/',{ state: { username: username } });
             }
 
         }catch(error){

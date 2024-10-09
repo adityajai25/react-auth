@@ -8,7 +8,8 @@ import {Toaster} from 'react-hot-toast';
 import ProtectedRoute from './components/Protected';
 import GuestRoute from './components/GuestRoute';
 
-axios.defaults.baseURL = import.meta.env.url;
+axios.defaults.baseURL = `${import.meta.env.VITE_URL}`;
+console.log(import.meta.env.VITE_URL);
 axios.defaults.withCredentials = true;
 
 function App() {

@@ -86,7 +86,7 @@ router.post('/login', async(req,res)=>{
             })
         }
         const username = users.fname;
-        const token = jwt.sign({ userId: users._id, username:users.fname }, process.env.jwt_key, { expiresIn: '10s' });
+        const token = jwt.sign({ userId: users._id, username:users.fname }, process.env.jwt_key, { expiresIn: '1hr' });
 
         console.log(username)
         if(users.email === req.body.email && users.password === req.body.password){
