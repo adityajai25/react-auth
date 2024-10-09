@@ -20,7 +20,6 @@ export default function Login() {
         e.preventDefault();
         try{
             const {email,password} = data;
-            console.log(`${import.meta.env.VITE_LOGIN}`);
             const response = await axios.post(`${import.meta.env.VITE_LOGIN}`,{
                 email,
                 password
