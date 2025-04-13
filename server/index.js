@@ -13,7 +13,7 @@ mongoose.connect(process.env.uri).then(()=>{
     }
 });
 const app = express();
-const port = 5000;
+const port = 2000;
 
 app.use(express.json());
 app.use(cookieParser());
